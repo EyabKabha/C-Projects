@@ -8,7 +8,7 @@ void main()
 	int mat[N][N] = { {1,2,3},{4,5,6},{7,8,9}};              //matrix who help to set X or O in the correct place
 	int i, j, num;
 	int cnt = 0;						 // define Variables 
-	char ch, player1, player2,ch2='c';		         // define Variables 
+	char ch, player1, player2;		                // define Variables 
 	char temp;
 	int XO[N][N] = {{' ',' ',' ' },                          // Empty Matrix to set X Or O 
 		       {' ',' ',' ' },
