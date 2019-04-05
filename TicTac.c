@@ -10,9 +10,9 @@ void main()
 	int cnt = 0;						// define Variables 
 	char ch, player1, player2,ch2='c';		    // define Variables 
 	char temp;
-	int XO[N][N] = { {' ',' ',' ' },	// Empty Matrix to set X Or O 
-					 {' ',' ',' ' },
-					 {' ',' ',' ' } };
+	int XO[N][N] = {{' ',' ',' ' },	// Empty Matrix to set X Or O 
+		       {' ',' ',' ' },
+		       {' ',' ',' ' } };
 	puts("=======================");
 	printf("Player 1 enter your choice X or O\n");  
 	scanf_s("\n%c", &ch); // we get from the user X or O 
