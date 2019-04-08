@@ -5,26 +5,30 @@
 #define N 3
 void main()
 {
-	int mat[N][N] = { {1,2,3},{4,5,6},{7,8,9}};              //matrix who help to set X or O in the correct place
 	int i, j, num;
-	int cnt = 0;						 // define Variables 
-	char ch, player1, player2;		                // define Variables 
-	char temp;
-	int XO[N][N] = {{' ',' ',' ' },                          // Empty Matrix to set X Or O 
-		       {' ',' ',' ' },
-		       {' ',' ',' ' } };
+	int cnt = 0;
+	int flag = 0;// define Variables 
+	char ch, player1, player2,temp;;		                // define Variables 
+
+	int mat[N][N] = { { 1,2,3 },
+					  { 4,5,6 },
+					  { 7,8,9 } };              //matrix who help to set X or O in the correct place
+
+	int XO[N][N] = { { ' ',' ',' ' },                          // Empty Matrix to set X Or O 
+				   	 { ' ',' ',' ' },
+					 { ' ',' ',' ' } };
 	puts("=======================");
-	printf("Player 1 enter your choice X or O\n");  
+	printf("Player 1 enter your choice X or O\n");
 	scanf_s("\n%c", &ch);                                    // we get from the user X or O 
 	if (islower(ch))
 	{
-		ch=toupper(ch);
+		ch = toupper(ch);
 	}
 	system("cls");                                          // clear the window
 	if (ch != 'X' && ch != 'O')                            // we validate to get just or X or O from the user 
 	{
 		printf("Error try again\n");                 // if not X or O we printing to the user to try again
-		main(); 
+		main();
 	}
 	if (ch == 'X' || ch == 'O')                        // check if the input X as player 1 got X and player2 got O
 		if (ch == 'X')
@@ -44,8 +48,7 @@ void main()
 
 	for (i = 0; i < N; i++)                 // printing the Matrix who Contains the numbers\n
 	{
-		for (j = 0; j < N; j++)
-		{
+		for (j = 0; j < N; j++){
 			printf("%4d", mat[i][j]);
 		}
 		printf("\n");
@@ -84,24 +87,31 @@ void main()
 		//printing the matrix
 		for (i = 0; i < N; i++)
 		{
-			for (j = 0; j < N; j++)
-			{
+			for (j = 0; j < N; j++){
 				printf("\t|%c|", XO[i][j]);
 			}
 			printf("\n");
 		}
 		if (cnt == 9) {				          	 // check if the matrix is full and we don't have one is won
 			printf("No One Win!!\n");
-			printf("Do you want to play again ?! (y or n)\n"); // ask the player if you want to play again
-			temp = _getch();		                  // we get from the user 
-			if (isupper(temp))
-				temp = tolower(temp);
-			else if (temp == 'y')            // check if he we want to play again
-				main();                 // if yes we return the main
-			else if (temp == 'n') {        // if no we print the program exit and we break the loop
-				printf("Program Exit\n");
-			}
-			break;
+
+			do {
+				printf("Do you want to play again ?! (y or n)\n");  // ask the player if you want to play again
+				temp = _getch(); // we get from the user 
+				if (isupper(temp))
+					temp = tolower(temp);
+				else if (temp == 'y') // check if he we want to play again
+					main(); // if yes we return the main
+				else if (temp == 'n') { // if no we print the program exit and we break the loop
+					printf("Program Exit\n");
+					flag = 1;
+					break;
+				}
+				else
+					printf("input incurrect\n");
+			} while (temp != 'n' && temp != 'y');
+			if (flag == 1)
+				break;
 		}
 		// Checking all the places that could be a victory
 		if (XO[0][0] == player1 && XO[0][1] == player1 && XO[0][2] == player1 ||
@@ -112,17 +122,25 @@ void main()
 			XO[0][2] == player1 && XO[1][2] == player1 && XO[2][2] == player1 ||
 			XO[0][1] == player1 && XO[1][1] == player1 && XO[2][1] == player1 ||
 			XO[0][0] == player1 && XO[1][0] == player1 && XO[2][0] == player1) {
-			printf("Player 1 is won\n");  // If the condition is true we print that player is win and we break the loop and exit
-			printf("Do you want to play again ?! (y or n)\n");  // ask the player if you want to play again
-			temp = _getch(); // we get from the user 
-			if (isupper(temp))
-				temp = tolower(temp);
-			else if(temp=='y') // check if he we want to play again
+			printf("Player 1 is the winner\n");  // If the condition is true we print that player is win and we break the loop and exit
+			
+			do {
+				printf("Do you want to play again ?! (y or n)\n");  // ask the player if you want to play again
+				temp = _getch(); // we get from the user 
+				if (isupper(temp))
+					temp = tolower(temp);
+				else if (temp == 'y') // check if he we want to play again
 					main(); // if yes we return the main
 				else if (temp == 'n') { // if no we print the program exit and we break the loop
 					printf("Program Exit\n");
+					flag = 1;
 					break;
 				}
+				else
+					printf("input incurrect\n");
+			} while (temp != 'n' && temp != 'y');
+			if (flag == 1)
+				break;
 		}
 		printf("Player 2 (%c)\n", player2);
 		printf("Enter the number you want \n");
@@ -166,17 +184,25 @@ void main()
 			XO[0][2] == player2 && XO[1][2] == player2 && XO[2][2] == player2 ||
 			XO[0][1] == player2 && XO[1][1] == player2 && XO[2][1] == player2 ||
 			XO[0][0] == player2 && XO[1][0] == player2 && XO[2][0] == player2) {
+			
 			printf("Player 2 is won\n"); // If the condition is true we print that player is win and we break the loop and exit
-			printf("Do you want to play again ?! (y or n)\n"); // ask the player if you want to play again
-			temp = _getch(); // we get from the user 
-			if (isupper(temp))
-				temp = tolower(temp);
-			else if (temp == 'y') // check if he we want to play again
-				main(); // if yes we return the main
-			else if (temp == 'n') { // if no we print the program exit and we break the loop
-				printf("Program Exit\n");
+			do {
+				printf("Do you want to play again ?! (y or n)\n");  // ask the player if you want to play again
+				temp = _getch(); // we get from the user 
+				if (isupper(temp))
+					temp = tolower(temp);
+				else if (temp == 'y') // check if he we want to play again
+					main(); // if yes we return the main
+				else if (temp == 'n') { // if no we print the program exit and we break the loop
+					printf("Program Exit\n");
+					flag = 1;
+					break;
+				}
+				else
+					printf("input incurrect\n");
+			} while (temp != 'n' && temp != 'y');
+			if (flag == 1)
 				break;
-			}
 		}
 	}
 	getchar();
